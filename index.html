@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taher Khallaf — Cloud &amp; IoT Engineer | HENNGE GIP Portfolio</title>
+<meta name="description" content="Portfolio of Taher Khallaf - Cloud & IoT Engineering student at INPT Rabat & UTokyo GCI candidate specializing in FastAPI backends, AWS, PyTorch ONNX Edge ML on Raspberry Pi, and Docker IaC.">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-dark: #090d16;
+    --bg-panel: rgba(16, 23, 38, 0.75);
+    --bg-panel-solid: #101726;
+    --bg-panel-hover: rgba(24, 34, 56, 0.9);
+    
+    --hennge-crimson: #ff3366;
+    --hennge-crimson-soft: #ff5c85;
+    --hennge-glow: rgba(255, 51, 102, 0.35);
+    
+    --cyber-mint: #00f2fe;
+    --cyber-blue: #4e65ff;
+    --mint-glow: rgba(0, 242, 254, 0.3);
+    
+    --sakura-pink: #f7aef8;
+    --text-main: #f0f4fc;
+    --text-muted: #9aa8c7;
+    --text-dim: #5c6b8a;
+    --border-line: rgba(255, 255, 255, 0.08);
+    --border-bright: rgba(0, 242, 254, 0.25);
+    
+    --font-heading: 'Noto Serif JP', 'Cinzel', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+    
+    --radius: 6px;
+    --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  ::selection { background: var(--hennge-crimson); color: #fff; }
+
+  /* Background Canvas */
+  #bg-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Structural Wrapper */
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+  @media(max-width: 640px) { .wrap { padding: 0 20px; } }
+
+  /* Glassmorphism utilities */
+  .glass-card {
+    background: var(--bg-panel);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-line);
+    border-radius: var(--radius);
+    transition: var(--transition);
+  }
+  .glass-card:hover {
+    border-color: var(--border-bright);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px var(--mint-glow);
+  }
+
+  /* Header & Navigation */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 36px;
+    background: rgba(9, 13, 22, 0.82);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-line);
+  }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700;
+    color: var(--text-main); text-decoration: none;
+  }
+  .logo-kanji {
+    background: linear-gradient(135deg, var(--hennge-crimson), var(--sakura-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.4rem; font-weight: 900;
+  }
+  .logo-badge {
+    font-family: var(--font-code); font-size: 0.68rem;
+    padding: 3px 8px; border-radius: 4px;
+    background: rgba(255, 51, 102, 0.12);
+    border: 1px solid rgba(255, 51, 102, 0.3);
+    color: var(--hennge-crimson-soft); letter-spacing: 0.05em;
+  }
+
+  .nav-right { display: flex; align-items: center; gap: 28px; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted); text-decoration: none;
+    font-family: var(--font-code); font-size: 0.8rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    transition: var(--transition);
+  }
+  .nav-links a:hover { color: var(--cyber-mint); text-shadow: 0 0 8px var(--cyber-mint); }
+
+  /* Time Clocks Widget */
+  .clocks {
+    display: flex; gap: 14px;
+    font-family: var(--font-code); font-size: 0.72rem; color: var(--text-dim);
+    border-left: 1px solid var(--border-line); padding-left: 16px;
+  }
+  .clock-item span { color: var(--cyber-mint); font-weight: 600; }
+  @media(max-width: 900px) { .clocks, .nav-links { display: none; } }
+
+  /* Mobile menu button */
+  .mobile-menu-btn {
+    display: none; background: none; border: 1px solid var(--border-line);
+    color: var(--text-main); font-size: 1.2rem; padding: 6px 12px; border-radius: 4px; cursor: pointer;
+  }
+  @media(max-width: 900px) { .mobile-menu-btn { display: block; } }
+
+  /* Mobile Dropdown */
+  .mobile-nav {
+    display: none; position: fixed; top: 60px; left: 0; right: 0;
+    background: var(--bg-panel-solid); border-bottom: 1px solid var(--border-line);
+    padding: 20px; flex-direction: column; gap: 16px; z-index: 99;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { color: var(--text-main); text-decoration: none; font-family: var(--font-code); }
+
+  /* HERO SECTION */
+  .hero {
+    min-height: 100vh;
+    padding: 150px 0 80px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center;
+  }
+  @media(max-width: 960px) { .hero-grid { grid-template-columns: 1fr; text-align: center; } }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-code); font-size: 0.78rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--cyber-mint); margin-bottom: 24px;
+    background: rgba(0, 242, 254, 0.08); padding: 6px 14px; border-radius: 20px;
+    border: 1px solid rgba(0, 242, 254, 0.2);
+  }
+  .eyebrow-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--cyber-mint);
+    box-shadow: 0 0 10px var(--cyber-mint); animation: blink 2s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity: 0.3;} 50%{opacity: 1;} }
+
+  .hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+    line-height: 1.1; font-weight: 700;
+    color: var(--text-main); margin-bottom: 24px;
+  }
+  .hero h1 .highlight-hennge {
+    background: linear-gradient(135deg, var(--hennge-crimson-soft), #ff7b00);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero h1 .highlight-cyber {
+    background: linear-gradient(135deg, var(--cyber-mint), var(--cyber-blue));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .hero p.lede {
+    font-size: 1.1rem; color: var(--text-muted); max-width: 54ch; margin-bottom: 36px;
+  }
+  @media(max-width: 960px) { .hero p.lede { margin: 0 auto 36px; } }
+
+  .hero-buttons {
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  @media(max-width: 960px) { .hero-buttons { justify-content: center; } }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-code); font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.04em; padding: 14px 28px; border-radius: var(--radius);
+    text-decoration: none; cursor: pointer; transition: var(--transition); border: none;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--hennge-crimson), #d91c4a);
+    color: #fff; box-shadow: 0 4px 20px var(--hennge-glow);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px); box-shadow: 0 6px 28px rgba(255, 51, 102, 0.6);
+  }
+  .btn-secondary {
+    background: rgba(0, 242, 254, 0.1);
+    color: var(--cyber-mint); border: 1px solid rgba(0, 242, 254, 0.3);
+  }
+  .btn-secondary:hover {
+    background: rgba(0, 242, 254, 0.2); border-color: var(--cyber-mint);
+    box-shadow: 0 0 15px var(--mint-glow); transform: translateY(-2px);
+  }
+  .btn-ghost {
+    background: transparent; color: var(--text-muted); border: 1px solid var(--border-line);
+  }
+  .btn-ghost:hover { border-color: var(--text-main); color: var(--text-main); }
+
+  /* Hero Stats Bar */
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 54px;
+  }
+  @media(max-width: 768px) { .hero-stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat-card {
+    padding: 18px 20px; border-radius: var(--radius);
+    background: rgba(16, 23, 38, 0.6); border: 1px solid var(--border-line);
+  }
+  .stat-num {
+    font-family: var(--font-code); font-size: 1.6rem; font-weight: 700;
+    color: var(--cyber-mint); line-height: 1.2;
+  }
+  .stat-label {
+    font-size: 0.76rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px;
+  }
+
+  /* TORII CIRCUIT GRAPHIC */
+  .torii-container {
+    position: relative; display: flex; justify-content: center; align-items: center;
+  }
+  .torii-card {
+    width: 100%; max-width: 440px; padding: 32px; border-radius: 12px;
+    background: radial-gradient(circle at center, rgba(16, 23, 38, 0.9), rgba(9, 13, 22, 0.95));
+    border: 1px solid rgba(255, 51, 102, 0.25);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 30px rgba(255, 51, 102, 0.05);
+    position: relative; overflow: hidden;
+  }
+  .torii-card::before {
+    content: ''; position: absolute; inset: -1px;
+    background: linear-gradient(45deg, transparent, var(--hennge-crimson), transparent, var(--cyber-mint), transparent);
+    z-index: -1; opacity: 0.3; border-radius: 13px;
+  }
+  .torii-card svg { width: 100%; height: auto; display: block; }
+
+  /* SECTION SHELL */
+  section { position: relative; z-index: 1; padding: 110px 0; border-top: 1px solid var(--border-line); }
+  .sec-head { margin-bottom: 56px; max-width: 650px; }
+  .sec-head h2 {
+    font-family: var(--font-heading); font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    color: var(--text-main); font-weight: 700; margin-top: 10px;
+  }
+  .sec-head p { color: var(--text-muted); font-size: 1.02rem; margin-top: 12px; }
+
+  /* REVEAL ANIMATION */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ABOUT & HENNGE FIT */
+  .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; }
+  @media(max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }
+
+  .about-text p { color: var(--text-muted); font-size: 1.02rem; margin-bottom: 20px; }
+  .about-text strong { color: var(--text-main); font-weight: 600; }
+
+  .hennge-box {
+    margin-top: 32px; padding: 24px; border-radius: var(--radius);
+    background: linear-gradient(135deg, rgba(255, 51, 102, 0.08), rgba(0, 242, 254, 0.05));
+    border: 1px solid rgba(255, 51, 102, 0.3);
+  }
+  .hennge-box h4 {
+    font-family: var(--font-heading); color: var(--hennge-crimson-soft);
+    font-size: 1.1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
+  }
+
+  .fact-sheet { display: flex; flex-direction: column; gap: 0; }
+  .fact-item {
+    padding: 16px 0; border-bottom: 1px solid var(--border-line);
+    display: flex; justify-content: space-between; gap: 12px; font-size: 0.95rem;
+  }
+  .fact-item:first-child { padding-top: 0; }
+  .fact-key { font-family: var(--font-code); font-size: 0.76rem; color: var(--text-dim); text-transform: uppercase; }
+  .fact-val { color: var(--text-main); text-align: right; font-weight: 500; }
+
+  /* PROJECTS SECTION */
+  .filter-tabs {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px;
+  }
+  .tab-btn {
+    font-family: var(--font-code); font-size: 0.8rem; padding: 8px 18px;
+    border-radius: 20px; border: 1px solid var(--border-line);
+    background: rgba(16, 23, 38, 0.5); color: var(--text-muted); cursor: pointer;
+    transition: var(--transition);
+  }
+  .tab-btn:hover, .tab-btn.active {
+    border-color: var(--cyber-mint); color: var(--cyber-mint); background: rgba(0, 242, 254, 0.1);
+  }
+
+  .projects-list { display: flex; flex-direction: column; gap: 28px; }
+  .project-card {
+    padding: 36px; display: grid; grid-template-columns: 1fr 2fr; gap: 32px;
+  }
+  @media(max-width: 860px) { .project-card { grid-template-columns: 1fr; } }
+
+  .project-meta { display: flex; flex-direction: column; justify-content: space-between; }
+  .project-number {
+    font-family: var(--font-code); font-size: 0.85rem; color: var(--cyber-mint);
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .project-title {
+    font-family: var(--font-heading); font-size: 1.5rem; color: var(--text-main); margin-bottom: 14px;
+  }
+
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-code); font-size: 0.72rem; padding: 4px 10px; border-radius: 4px;
+    background: rgba(0, 230, 118, 0.12); border: 1px solid rgba(0, 230, 118, 0.3); color: #00e676;
+    margin-bottom: 14px; width: fit-content; text-decoration: none;
+  }
+  .live-badge:hover { background: rgba(0, 230, 118, 0.25); }
+
+  .project-desc { color: var(--text-muted); font-size: 0.98rem; margin-bottom: 20px; }
+
+  .tags-flex { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .tag {
+    font-family: var(--font-code); font-size: 0.74rem; padding: 4px 10px;
+    border-radius: 4px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-line);
+    color: var(--sakura-pink);
+  }
+
+  .project-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* BENCHMARK VISUALIZER WIDGET */
+  .benchmark-container {
+    padding: 32px; margin-top: 48px; border-radius: var(--radius);
+    background: var(--bg-panel-solid); border: 1px solid var(--border-line);
+  }
+  .benchmark-header {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px; margin-bottom: 28px;
+  }
+  .benchmark-metrics-toggle {
+    display: flex; gap: 8px; background: rgba(9, 13, 22, 0.6); padding: 4px; border-radius: 6px;
+    border: 1px solid var(--border-line);
+  }
+  .metric-btn {
+    font-family: var(--font-code); font-size: 0.75rem; padding: 6px 14px;
+    border-radius: 4px; border: none; background: transparent; color: var(--text-dim); cursor: pointer;
+  }
+  .metric-btn.active {
+    background: var(--cyber-mint); color: #090d16; font-weight: 700;
+  }
+
+  .bar-chart { display: flex; flex-direction: column; gap: 20px; }
+  .chart-row { display: flex; flex-direction: column; gap: 8px; }
+  .row-info { display: flex; justify-content: space-between; font-family: var(--font-code); font-size: 0.85rem; }
+  .bar-track {
+    height: 24px; background: rgba(255, 255, 255, 0.05); border-radius: 4px; overflow: hidden;
+    position: relative; border: 1px solid var(--border-line);
+  }
+  .bar-fill {
+    height: 100%; width: 0%; border-radius: 3px; transition: width 1s ease-in-out;
+    display: flex; align-items: center; justify-content: flex-end; padding-right: 10px;
+    font-family: var(--font-code); font-size: 0.72rem; font-weight: 700; color: #090d16;
+  }
+  .fill-fp32 { background: linear-gradient(90deg, #ff7b00, #ffae00); }
+  .fill-int8-dyn { background: linear-gradient(90deg, #4e65ff, #9254de); }
+  .fill-int8-stat { background: linear-gradient(90deg, var(--cyber-mint), #00e676); }
+
+  /* RAG API SIMULATOR WIDGET */
+  .rag-widget {
+    padding: 32px; border-radius: var(--radius); margin-top: 48px;
+    background: var(--bg-panel-solid); border: 1px solid var(--border-bright);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(0, 242, 254, 0.05);
+  }
+  .rag-console {
+    background: #060911; border-radius: 6px; border: 1px solid var(--border-line);
+    padding: 20px; font-family: var(--font-code); font-size: 0.85rem; margin-top: 20px;
+  }
+  .rag-input-box {
+    display: flex; gap: 12px; margin-bottom: 16px;
+  }
+  .rag-input {
+    flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-line);
+    padding: 12px 16px; border-radius: 4px; color: var(--text-main); font-family: var(--font-code);
+  }
+  .rag-input:focus { outline: none; border-color: var(--cyber-mint); }
+  .preset-queries { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .preset-chip {
+    font-family: var(--font-code); font-size: 0.72rem; padding: 4px 10px; border-radius: 4px;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-line); color: var(--text-muted);
+    cursor: pointer; transition: var(--transition);
+  }
+  .preset-chip:hover { border-color: var(--cyber-mint); color: var(--cyber-mint); }
+
+  .rag-output {
+    min-height: 120px; color: var(--text-muted); line-height: 1.6;
+    border-top: 1px dashed var(--border-line); padding-top: 16px;
+  }
+
+  /* LEADERSHIP & CLUBS */
+  .lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media(max-width: 768px) { .lead-grid { grid-template-columns: 1fr; } }
+  .lead-card { padding: 32px; }
+  .lead-role {
+    font-family: var(--font-code); font-size: 0.75rem; color: var(--cyber-mint);
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; display: block;
+  }
+
+  /* CONTACT & FOOTER */
+  .contact-box {
+    padding: 48px; border-radius: var(--radius);
+    background: linear-gradient(135deg, rgba(16, 23, 38, 0.9), rgba(255, 51, 102, 0.08));
+    border: 1px solid rgba(255, 51, 102, 0.3); text-align: center;
+  }
+  .contact-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 32px; }
+
+  footer {
+    padding: 40px 0; border-top: 1px solid var(--border-line); text-align: center;
+    font-family: var(--font-code); font-size: 0.8rem; color: var(--text-dim);
+  }
+
+  /* MODAL SHELL */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(4, 7, 13, 0.85); backdrop-filter: blur(12px);
+    display: none; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-content {
+    background: var(--bg-panel-solid); border: 1px solid var(--border-bright);
+    border-radius: 8px; max-width: 820px; width: 100%; max-height: 88vh; overflow-y: auto;
+    padding: 36px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  }
+  .modal-close {
+    position: absolute; top: 20px; right: 20px; background: none; border: none;
+    color: var(--text-dim); font-size: 1.5rem; cursor: pointer;
+  }
+  .modal-close:hover { color: var(--text-main); }
+
+  /* Toast notification */
+  #toast {
+    position: fixed; bottom: 30px; right: 30px; z-index: 2000;
+    background: var(--cyber-mint); color: #090d16; font-family: var(--font-code);
+    font-size: 0.85rem; font-weight: 700; padding: 12px 24px; border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0, 242, 254, 0.4); opacity: 0; transform: translateY(20px);
+    transition: all 0.3s ease; pointer-events: none;
+  }
+  #toast.show { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="logo">
+    <span class="logo-kanji">変化</span>
+    <span>Taher Khallaf</span>
+    <span class="logo-badge">UTokyo GCI &amp; HENNGE 2026</span>
+  </a>
+
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#benchmarks">Edge ML</a></li>
+      <li><a href="#simulator">RAG Simulator</a></li>
+      <li><a href="#leadership">Leadership</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="clocks">
+      <div class="clock-item">Rabat: <span id="time-rabat">--:--</span></div>
+      <div class="clock-item">Tokyo: <span id="time-tokyo">--:--</span></div>
+    </div>
+
+    <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<!-- MOBILE NAVIGATION DROPDOWN -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#projects" onclick="closeMobileNav()">Projects</a>
+  <a href="#benchmarks" onclick="closeMobileNav()">Edge ML Benchmarks</a>
+  <a href="#simulator" onclick="closeMobileNav()">RAG Simulator</a>
+  <a href="#leadership" onclick="closeMobileNav()">Leadership</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+</div>
+
+<!-- HERO SECTION -->
+<header class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Cloud &amp; IoT Engineering — INPT Rabat · UTokyo GCI Enrolled · HENNGE Aspirant
+      </div>
+
+      <h1>Building resilient systems with an <span class="highlight-hennge">eye on Japan</span>.</h1>
+
+      <p class="lede">
+        First-year Cloud &amp; IoT Engineering student at <strong>INPT Rabat</strong> and candidate in <strong>The University of Tokyo's GCI Program</strong>. I architect production-ready cloud APIs on <strong>AWS EC2</strong> with <strong>FastAPI</strong> &amp; <strong>Terraform</strong>, optimize PyTorch deep learning models to <strong>ONNX INT8</strong> for <strong>Raspberry Pi</strong> edge targets, and build real-time IoT digital twins.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">View Projects &amp; Architectures</a>
+        <button class="btn btn-secondary" onclick="openCvModal()">📄 View 1-Page Resume (CV)</button>
+        <button class="btn btn-ghost" onclick="openCoverLetterModal()">Read HENNGE Letter</button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Core Architectures</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">98.93%</div>
+          <div class="stat-label">ECG Edge Model Accuracy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">86.31ms</div>
+          <div class="stat-label">Raspberry Pi 4 ONNX Latency</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">UTokyo GCI</div>
+          <div class="stat-label">Japan AI/Data Science Enrolled</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TORII / CIRCUIT GRAPHIC -->
+    <div class="torii-container">
+      <div class="torii-card">
+        <svg viewBox="0 0 340 320" xmlns="http://www.w3.org/2000/svg">
+          <!-- Torii Pillars -->
+          <path d="M70 300 L70 70 M270 300 L270 70" stroke="#ff3366" stroke-width="4" stroke-linecap="round" fill="none" />
+          <!-- Crossbars -->
+          <path d="M30 90 L310 90 M30 90 L30 72 M310 90 L310 72" stroke="#ff3366" stroke-width="5" stroke-linecap="round" fill="none" />
+          <path d="M50 140 L290 140" stroke="#ff3366" stroke-width="3" stroke-linecap="round" fill="none" />
+          <!-- Circuit traces -->
+          <path d="M70 180 L120 180 L120 210 L160 210" stroke="#00f2fe" stroke-width="2" stroke-dasharray="4 4" fill="none" />
+          <path d="M270 180 L220 180 L220 230 L180 230" stroke="#00f2fe" stroke-width="2" stroke-dasharray="4 4" fill="none" />
+          <path d="M170 90 L170 45 L130 25" stroke="#00f2fe" stroke-width="2" fill="none" />
+          <path d="M170 45 L210 20" stroke="#00f2fe" stroke-width="2" fill="none" />
+          <!-- Nodes -->
+          <circle cx="70" cy="70" r="5" fill="#00f2fe" />
+          <circle cx="270" cy="70" r="5" fill="#00f2fe" />
+          <circle cx="160" cy="210" r="5" fill="#ff3366" />
+          <circle cx="180" cy="230" r="5" fill="#ff3366" />
+          <circle cx="130" cy="25" r="4" fill="#00f2fe" />
+          <circle cx="210" cy="20" r="4" fill="#00f2fe" />
+        </svg>
+        <div style="text-align: center; margin-top: 16px; font-family: var(--font-code); font-size: 0.78rem; color: var(--text-muted);">
+          <span>雲 (Cloud)</span> · <span>東京 (UTokyo GCI)</span> · <span>変化 (HENNGE Transformation)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT & HENNGE FIT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Background &amp; Education</div>
+      <h2>Systems engineering, grounded in evidence &amp; discipline.</h2>
+    </div>
+
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>
+          I am enrolled in the engineering cycle at <strong>INPT Rabat</strong> (Morocco's premier National Institute of Posts and Telecommunications), specializing in <strong>Cloud &amp; IoT Engineering</strong>. My focus lies at the intersection of robust backend cloud architecture, embedded edge machine learning optimization, and real-time network telemetry.
+        </p>
+
+        <p>
+          To deepen my alignment with Japanese engineering practices, I am enrolled in <strong>The University of Tokyo's Global Consumer Intelligence (UTokyo GCI)</strong> program, exploring advanced data science and machine learning applications.
+        </p>
+
+        <p>
+          Outside technical architecture, I lead the <strong>English cell of the Great Debaters Club</strong> at INPT. Debating British Parliamentary style has refined my ability to build evidence-first arguments and communicate complex ideas clearly.
+        </p>
+
+        <div class="hennge-box">
+          <h4><span>変化</span> HENNGE Culture &amp; Japan Alignment</h4>
+          <p style="font-size: 0.94rem; color: var(--text-muted); margin-bottom: 0;">
+            Japan's core engineering ethos — automating the routine so human intellect can tackle what is genuinely difficult — deeply resonates with me. HENNGE sits at the pinnacle of cloud security and global software craftsmanship in Tokyo. My goal is to build an enduring career in Japan, bringing energy, technical rigour, and open-source mindset to HENNGE's engineering teams.
+          </p>
+        </div>
+      </div>
+
+      <div class="fact-sheet glass-card" style="padding: 28px;">
+        <div class="fact-item">
+          <span class="fact-key">Degree</span>
+          <span class="fact-val">INPT Rabat (Cloud &amp; IoT)</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-key">Japan Education</span>
+          <span class="fact-val">UTokyo GCI Program (Enrolled)</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-key">Prep School</span>
+          <span class="fact-val">CPGE Ibn Timiya (Math/Physics)</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-key">Languages</span>
+          <span class="fact-val">Arabic (Native), English (Fluent), French (Fluent), Japanese (Self-Studying)</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-key">Leadership</span>
+          <span class="fact-val">Head, English Cell — Great Debaters</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-key">Core Stack</span>
+          <span class="fact-val">FastAPI · AWS · Docker · PyTorch ONNX</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS SECTION -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Projects Showcase</div>
+      <h2>Production architectures &amp; edge deployments.</h2>
+      <p>Explored, designed, containerized, and deployed with full documentation.</p>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="filter-tabs reveal">
+      <button class="tab-btn active" onclick="filterProjects('all', this)">All Architectures</button>
+      <button class="tab-btn" onclick="filterProjects('cloud', this)">Cloud &amp; AI</button>
+      <button class="tab-btn" onclick="filterProjects('edge', this)">Edge ML &amp; IoT</button>
+      <button class="tab-btn" onclick="filterProjects('devops', this)">DevOps &amp; Infra</button>
+    </div>
+
+    <div class="projects-list reveal">
+
+      <!-- PROJECT 1: CLOUD NOTES API -->
+      <article class="project-card glass-card" data-category="cloud devops">
+        <div class="project-meta">
+          <div>
+            <div class="project-number">01 / CLOUD &amp; AI ARCHITECTURE</div>
+            <h3 class="project-title">Cloud Notes API &amp; AI RAG Assistant</h3>
+            <a href="https://16.16.110.208.sslip.io/docs" target="_blank" rel="noopener" class="live-badge">
+              <span>🟢 Live Interactive API Docs (HTTPS)</span>
+            </a>
+          </div>
+          <div class="tags-flex">
+            <span class="tag">FastAPI</span>
+            <span class="tag">PostgreSQL 15</span>
+            <span class="tag">Claude 3.5 Sonnet</span>
+            <span class="tag">Docker</span>
+            <span class="tag">AWS EC2</span>
+            <span class="tag">Terraform IaC</span>
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">slowapi</span>
+          </div>
+        </div>
+        <div>
+          <p class="project-desc">
+            A production-ready containerized backend deployed on <strong>AWS EC2</strong> featuring multi-tenant JWT authentication with Argon2 password hashing. Integrated with <strong>Anthropic Claude 3.5 Sonnet</strong> for natural language note summarization, automatic topic tagging, and context-aware RAG vector search (<code>/ask_notes</code>). Provisioned with <strong>Terraform IaC</strong> and deployed seamlessly via <strong>GitHub Actions CI/CD</strong>.
+          </p>
+          <div class="project-actions">
+            <button class="btn btn-secondary" onclick="openArchModal('cloud-notes')">View System Architecture</button>
+            <a href="#simulator" class="btn btn-ghost">Try RAG Simulator</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 2: ECG EDGE ML -->
+      <article class="project-card glass-card" data-category="edge">
+        <div class="project-meta">
+          <div>
+            <div class="project-number">02 / EMBEDDED DEEP LEARNING</div>
+            <h3 class="project-title">ECG Multimodal Edge Inference Chain</h3>
+            <div class="live-badge" style="background: rgba(0, 242, 254, 0.12); border-color: rgba(0, 242, 254, 0.3); color: var(--cyber-mint);">
+              <span>⚡ 86.31ms Latency (Raspberry Pi 4)</span>
+            </div>
+          </div>
+          <div class="tags-flex">
+            <span class="tag">PyTorch</span>
+            <span class="tag">ONNX Runtime</span>
+            <span class="tag">INT8 Static Quantization</span>
+            <span class="tag">Raspberry Pi 4</span>
+            <span class="tag">Mosquitto MQTT</span>
+            <span class="tag">WFDB Chapman Dataset</span>
+          </div>
+        </div>
+        <div>
+          <p class="project-desc">
+            Supervised internship project optimizing a 12-lead ECG neural classification model (1D-CNN + BiLSTM) for embedded hardware deployment. Converted PyTorch weights to <strong>ONNX INT8 Static Calibration</strong>, cutting model size by 12.3% and reducing latency on Raspberry Pi 4 to <strong>86.31 ms</strong> while achieving <strong>98.93% Accuracy</strong>. Integrated real-time edge telemetry published over <strong>MQTT</strong> to live monitoring subscribers.
+          </p>
+          <div class="project-actions">
+            <button class="btn btn-secondary" onclick="openArchModal('ecg-edge')">View Pipeline &amp; ONNX Specs</button>
+            <a href="#benchmarks" class="btn btn-ghost">View Pi 4 Benchmarks</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 3: IOT DIGITAL TWIN -->
+      <article class="project-card glass-card" data-category="edge devops">
+        <div class="project-meta">
+          <div>
+            <div class="project-number">03 / IOT TELEMETRY ENGINE</div>
+            <h3 class="project-title">IoT Digital Twin System &amp; Dashboard</h3>
+            <div class="live-badge" style="background: rgba(247, 174, 248, 0.12); border-color: rgba(247, 174, 248, 0.3); color: var(--sakura-pink);">
+              <span>📊 Grafana 10.4 Auto-Provisioned</span>
+            </div>
+          </div>
+          <div class="tags-flex">
+            <span class="tag">MQTT</span>
+            <span class="tag">RTOS</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Docker Compose</span>
+            <span class="tag">Grafana 10.4.2</span>
+            <span class="tag">Model-Based Design (MIL/SIL)</span>
+          </div>
+        </div>
+        <div>
+          <p class="project-desc">
+            A software digital twin mirror for physical IoT setups. Captures real-time sensor streams via MQTT broker, persists metrics to PostgreSQL container, and auto-provisions live telemetry dashboards in Grafana. Engineered under Model-Based Design practices (MIL/SIL/HIL).
+          </p>
+          <div class="project-actions">
+            <button class="btn btn-secondary" onclick="openArchModal('iot-twin')">View Telemetry Architecture</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 4: POST MANAGEMENT REST API -->
+      <article class="project-card glass-card" data-category="cloud">
+        <div class="project-meta">
+          <div>
+            <div class="project-number">04 / REST API &amp; AUTHENTICATION</div>
+            <h3 class="project-title">Post Management REST API</h3>
+            <div class="live-badge" style="background: rgba(78, 101, 255, 0.12); border-color: rgba(78, 101, 255, 0.3); color: #8899ff;">
+              <span>🔑 JWT &amp; OAuth2 Authentication</span>
+            </div>
+          </div>
+          <div class="tags-flex">
+            <span class="tag">Python</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">SQLAlchemy ORM</span>
+            <span class="tag">Alembic</span>
+            <span class="tag">OAuth2 / JWT</span>
+          </div>
+        </div>
+        <div>
+          <p class="project-desc">
+            A RESTful backend API with complete CRUD operations, user-generated content voting logic, and strict OAuth2 JWT token-based authorization scoping. Utilizes SQLAlchemy ORM for database abstraction and Alembic for seamless migration management.
+          </p>
+          <div class="project-actions">
+            <button class="btn btn-secondary" onclick="openArchModal('post-api')">View API Blueprint</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDGE ML BENCHMARK VISUALIZER -->
+<section id="benchmarks">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Interactive Hardware Metrics</div>
+      <h2>ECG Edge Model Benchmarks (Raspberry Pi 4 vs PC)</h2>
+      <p>Empirical performance data comparing PyTorch FP32 baseline against ONNX INT8 Dynamic and INT8 Static Calibration on Raspberry Pi 4 (aarch64).</p>
+    </div>
+
+    <div class="benchmark-container glass-card reveal">
+      <div class="benchmark-header">
+        <div>
+          <h3 style="font-family: var(--font-heading); color: var(--text-main); font-size: 1.25rem;">Optimization Visualizer</h3>
+          <span style="font-family: var(--font-code); font-size: 0.78rem; color: var(--text-dim);">Dataset: Chapman-Shaoxing (10,546 ECG records, 500 Hz)</span>
+        </div>
+        <div class="benchmark-metrics-toggle">
+          <button class="metric-btn active" onclick="switchMetric('latency', this)">Latency (Pi 4 ms)</button>
+          <button class="metric-btn" onclick="switchMetric('size', this)">Model Size (MB)</button>
+          <button class="metric-btn" onclick="switchMetric('accuracy', this)">Accuracy (%)</button>
+        </div>
+      </div>
+
+      <div class="bar-chart" id="chart-bars">
+        <!-- Rows injected dynamically via JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RAG API SIMULATOR WIDGET -->
+<section id="simulator">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Interactive API Demo</div>
+      <h2>Cloud Notes AI RAG Simulator</h2>
+      <p>Simulate how the <code>/ask_notes</code> endpoint processes queries over your stored note collection using Claude 3.5 Sonnet.</p>
+    </div>
+
+    <div class="rag-widget reveal">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--cyber-mint);">POST /api/v1/notes/ask_notes</h3>
+        <span style="font-family: var(--font-code); font-size: 0.72rem; color: #00e676; background: rgba(0, 230, 118, 0.1); padding: 4px 8px; border-radius: 4px;">200 OK — Rate Limit: 10 req/min</span>
+      </div>
+
+      <div class="preset-queries">
+        <span style="font-family: var(--font-code); font-size: 0.76rem; color: var(--text-dim); align-self: center;">Preset Prompts:</span>
+        <button class="preset-chip" onclick="setQuery('How does rate limiting protect the FastAPI backend?')">Rate Limiting Specs</button>
+        <button class="preset-chip" onclick="setQuery('What are the ONNX quantization results on Raspberry Pi 4?')">ONNX Quantization Results</button>
+        <button class="preset-chip" onclick="setQuery('Summarize the Terraform EC2 deployment steps')">Terraform Deployment</button>
+      </div>
+
+      <div class="rag-console">
+        <div class="rag-input-box">
+          <input type="text" id="rag-input" class="rag-input" placeholder="Ask a natural language query over stored notes..." value="How does rate limiting protect the FastAPI backend?">
+          <button class="btn btn-primary" onclick="runRagQuery()">Execute RAG Query</button>
+        </div>
+
+        <div class="rag-output" id="rag-output">
+          Click "Execute RAG Query" or select a preset prompt above to test the interactive simulated Claude 3.5 Sonnet response.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP & CLUBS -->
+<section id="leadership">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Leadership &amp; Communication</div>
+      <h2>Building communities beyond the code.</h2>
+    </div>
+
+    <div class="lead-grid reveal">
+      <div class="lead-card glass-card">
+        <span class="lead-role">Head of English Cell</span>
+        <h3 style="font-family: var(--font-heading); color: var(--text-main); font-size: 1.3rem; margin-bottom: 12px;">Great Debaters Club (INPT)</h3>
+        <p style="color: var(--text-muted); font-size: 0.96rem;">
+          Designed and delivered a 14-session onboarding program for first-year debaters focused on overcoming public speaking anxiety and structuring British Parliamentary arguments. Compete in formal debate rounds, proving that technical precision and clear oral persuasion stem from the same evidence-based mindset.
+        </p>
+      </div>
+
+      <div class="lead-card glass-card">
+        <span class="lead-role">Founder &amp; Technical Lead</span>
+        <h3 style="font-family: var(--font-heading); color: var(--text-main); font-size: 1.3rem; margin-bottom: 12px;">I-LOUD — Cloud &amp; DevOps Initiative</h3>
+        <p style="color: var(--text-muted); font-size: 0.96rem;">
+          Spearheaded the technical website and community resources for INPT's student DevOps cell. Authored full architectural documentations and guided team members through containerization and CI/CD fundamentals.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <div class="eyebrow" style="margin-bottom: 16px;">Open for HENNGE Global Internship Program 2026</div>
+      <h2 style="font-family: var(--font-heading); font-size: 2.2rem; color: var(--text-main); margin-bottom: 16px;">Let's build something exceptional together.</h2>
+      <p style="color: var(--text-muted); max-width: 580px; margin: 0 auto;">
+        Whether discussing cloud architecture on AWS, edge ML optimizations, or technical challenges for HENNGE's GIP selection process, I'd love to connect.
+      </p>
+
+      <div class="contact-links">
+        <button class="btn btn-primary" onclick="copyEmail()">📋 Copy Email (khallaftaher392@gmail.com)</button>
+        <a href="https://github.com/khallaftaha-cmyk" target="_blank" rel="noopener" class="btn btn-secondary">GitHub Profile</a>
+        <a href="https://www.linkedin.com/in/taher-khallaf/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn Profile</a>
+        <button class="btn btn-ghost" onclick="openCvModal()">View 1-Page Resume (CV)</button>
+        <button class="btn btn-ghost" onclick="openCoverLetterModal()">View HENNGE Cover Letter</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>雲 · Taher Khallaf — INPT Rabat &amp; UTokyo GCI Enrolled</span><br>
+    <span style="font-size: 0.72rem; color: var(--text-dim); margin-top: 6px; display: inline-block;">Targeting HENNGE Global Internship Program · Tokyo, Japan</span>
+  </div>
+</footer>
+
+<!-- MODAL DIALOGS -->
+
+<!-- ARCHITECTURE MODAL -->
+<div class="modal-overlay" id="arch-modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeArchModal()">&times;</button>
+    <div id="modal-body">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+</div>
+
+<!-- COVER LETTER MODAL -->
+<div class="modal-overlay" id="letter-modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeCoverLetterModal()">&times;</button>
+    <h3 style="font-family: var(--font-heading); color: var(--hennge-crimson-soft); font-size: 1.4rem; margin-bottom: 16px;">HENNGE Global Internship Application Letter</h3>
+    <div style="font-family: var(--font-body); font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; display: flex; flex-direction: column; gap: 14px;">
+      <p><strong>Applicant:</strong> KHALLAF Taher | INPT Rabat (Cloud &amp; IoT) &amp; UTokyo GCI Enrolled</p>
+      <p><strong>Target Program:</strong> HENNGE Global Internship Program (Full Stack Engineering Pathway)</p>
+      <hr style="border-color: var(--border-line);">
+      <p>Dear HENNGE Global Internship Team,</p>
+      <p>I am writing to express my strong enthusiasm for applying to the Full Stack Engineering pathway of the HENNGE Global Internship Program (GIP). What drew me to HENNGE is not just your position as a cloud security leader in Japan, but how transparently your engineering team communicates — from technical post-mortems and open-source contributions to hiring philosophies on your engineering blog. Most organizations talk about open engineering culture; HENNGE actively publishes it. That commitment to transparency and technical excellence is precisely the environment where I want to learn and contribute.</p>
+      <p>My most defining engineering project is my <strong>Cloud Notes API</strong> — a production backend built with FastAPI, PostgreSQL, and Docker, deployed live on AWS EC2 via Terraform IaC and GitHub Actions CI/CD. Watching the backend architecture click into place was deeply satisfying. However, the real breakthrough occurred when I built a React frontend interface to consume the API. Coming from a purely backend mindset, mixing UI components with state management felt unfamiliar at first — until the moment I created a new note and saw it render instantly across the application without a page refresh. That moment transformed full-stack engineering from a label into an intuitive craft. I am currently extending this platform with an AI Retrieval-Augmented Generation (RAG) vector layer using Claude 3.5 Sonnet to enable natural language querying over stored notes.</p>
+      <p>This drive to examine processes rather than settled outputs shapes how I approach developer workflows. While configuring authentication, I spent hours debugging JWT requests in Postman before realizing I could store tokens in environment variables to automate header injection across my test suite. It was a simple realization, but it permanently altered how I evaluate developer productivity.</p>
+      <p>I apply this exact same mindset beyond software architecture. As Head of the English Debating Cell at INPT, I designed a 14-session onboarding program to help engineering students structure British Parliamentary arguments and overcome speaking anxiety. Earlier, as head of sponsorship for our STEM club, early failed pitches taught me a crucial lesson in communication: genuine persuasion requires showing stakeholders the value they gain, rather than simply broadcasting what you built.</p>
+      <p>My goal to live and work in Japan is rooted in years of self-taught language study and a deep respect for Japan’s engineering philosophy — automating routine processes so human intellect can tackle complex problems. My enrollment in <strong>The University of Tokyo's Global Consumer Intelligence (UTokyo GCI)</strong> program reflects my active commitment to engaging with Japanese data science and engineering methodologies. The HENNGE Global Internship is not a stepping stone for me; it is the specific, deliberate first step toward building a long-term engineering career in Tokyo.</p>
+      <p>With deep respect,<br><strong>KHALLAF Taher</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- CV MODAL -->
+<div class="modal-overlay" id="cv-modal">
+  <div class="modal-content" style="max-width: 860px;">
+    <button class="modal-close" onclick="closeCvModal()">&times;</button>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h3 style="font-family: var(--font-heading); color: var(--cyber-mint); font-size: 1.4rem;">TAHER KHALLAF — 1-Page Official Resume (CV)</h3>
+      <a href="file:///C:/Users/DELL/.gemini/antigravity/brain/47435b31-e316-43da-859b-7b5df856362d/taher_khallaf_resume.html" target="_blank" class="btn btn-secondary" style="font-size: 0.76rem; padding: 6px 14px;">Print / Download PDF</a>
+    </div>
+    <div style="background: #fff; color: #1a1a1a; padding: 28px; border-radius: 6px; font-family: sans-serif; font-size: 0.9rem; line-height: 1.4;">
+      <div style="text-align: center; border-bottom: 2px solid #222; padding-bottom: 8px; margin-bottom: 14px;">
+        <h2 style="font-size: 1.5rem; text-transform: uppercase; margin-bottom: 4px; color: #0f172a;">KHALLAF TAHER</h2>
+        <div style="font-size: 0.95rem; font-weight: 600; color: #475569;">Cloud &amp; IoT Engineering Student · HENNGE GIP Candidate</div>
+        <div style="font-size: 0.85rem; color: #334155; margin-top: 4px;">
+          Rabat, Morocco | +212 697-307024 | khallaftaher392@gmail.com | github.com/khallaftaha-cmyk | linkedin.com/in/taher-khallaf
+        </div>
+      </div>
+
+      <div style="font-weight: bold; border-bottom: 1px solid #cbd5e1; margin-bottom: 6px; text-transform: uppercase; color: #0f172a;">Education</div>
+      <div style="margin-bottom: 6px;">
+        <strong>Institut National des Postes et Télécommunications (INPT)</strong> — Rabat, Morocco (2025–Present)<br>
+        <em>Engineering Degree in Cloud &amp; IoT Engineering</em><br>
+        <strong>The University of Tokyo (UTokyo GCI)</strong> — Tokyo, Japan (2026 Enrolled)<br>
+        <em>Global Consumer Intelligence &amp; Data Science Program</em><br>
+        <strong>Classes Préparatoires Ibn Timiya</strong> — Marrakech, Morocco (2023–2025)<br>
+        <em>Mathematics, Physics &amp; Computer Science Prep Program</em>
+      </div>
+
+      <div style="font-weight: bold; border-bottom: 1px solid #cbd5e1; margin-top: 12px; margin-bottom: 6px; text-transform: uppercase; color: #0f172a;">Technical Skills &amp; Languages</div>
+      <div style="margin-bottom: 6px; font-size: 0.88rem;">
+        • <strong>Cloud &amp; DevOps:</strong> AWS (EC2, S3, IAM), Docker, Terraform, GitHub Actions, Nginx, Linux (Bash)<br>
+        • <strong>Backend &amp; Web:</strong> Python (FastAPI, PyTorch), React, JS (ES6+), REST APIs, OAuth2, JWT, SQL, HTML/CSS<br>
+        • <strong>DB &amp; Protocols:</strong> PostgreSQL, SQLAlchemy, Alembic, ONNX Runtime, Mosquitto MQTT, slowapi<br>
+        • <strong>Languages:</strong> Arabic (Native), English (Fluent / Debater), French (Fluent), Japanese (Basic / Self-Studying)
+      </div>
+
+      <div style="font-weight: bold; border-bottom: 1px solid #cbd5e1; margin-top: 12px; margin-bottom: 6px; text-transform: uppercase; color: #0f172a;">Technical Projects</div>
+      <div style="margin-bottom: 8px;">
+        <strong>Cloud Notes API &amp; AI RAG Assistant</strong> [Live: https://16.16.110.208.sslip.io/docs]<br>
+        <span style="font-size: 0.82rem; color: #475569;">FastAPI, PostgreSQL, Claude 3.5 Sonnet, Docker, AWS EC2, Terraform, GitHub Actions</span>
+        <ul style="margin-left: 18px; margin-top: 2px;">
+          <li>Containerized AWS backend with Nginx SSL proxy, JWT authentication (Argon2), and Claude 3.5 Sonnet RAG vector search.</li>
+          <li>Enforced slowapi rate limiting (10 req/min) and automated AWS deployment via Terraform &amp; CI/CD.</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 8px;">
+        <strong>ECG Multimodal Edge Inference Chain</strong> (Supervised Internship Project)<br>
+        <span style="font-size: 0.82rem; color: #475569;">PyTorch, ONNX INT8 Static Quantization, Raspberry Pi 4, Mosquitto MQTT</span>
+        <ul style="margin-left: 18px; margin-top: 2px;">
+          <li>Quantized 12-lead ECG PyTorch model to ONNX INT8 static calibration for Raspberry Pi 4 (86.31 ms latency, 98.93% Accuracy).</li>
+          <li>Architected real-time MQTT telemetry streaming live edge predictions to Mosquitto broker clients.</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 8px;">
+        <strong>Post Management REST API</strong> (Personal Project)<br>
+        <span style="font-size: 0.82rem; color: #475569;">Python, FastAPI, PostgreSQL, SQLAlchemy ORM, Alembic, JWT, OAuth2</span>
+        <ul style="margin-left: 18px; margin-top: 2px;">
+          <li>Developed secure REST API with CRUD logic, voting system, OAuth2 JWT auth scoping, and Alembic database migrations.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div id="toast">Email copied to clipboard!</div>
+
+<!-- JAVASCRIPT LOGIC -->
+<script>
+  // 1. Dynamic Tokyo & Rabat Clocks
+  function updateClocks() {
+    const now = new Date();
+    const rabatFormatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Africa/Casablanca', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+    });
+    document.getElementById('time-rabat').innerText = rabatFormatter.format(now);
+
+    const tokyoFormatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+    });
+    document.getElementById('time-tokyo').innerText = tokyoFormatter.format(now);
+  }
+  setInterval(updateClocks, 1000);
+  updateClocks();
+
+  // 2. Mobile Nav Toggle
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  mobileToggle.addEventListener('click', () => { mobileNav.classList.toggle('open'); });
+  function closeMobileNav() { mobileNav.classList.remove('open'); }
+
+  // 3. Reveal on Scroll
+  const revealElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  revealElements.forEach(el => observer.observe(el));
+
+  // 4. Project Filtering
+  function filterProjects(cat, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach(card => {
+      const categories = card.getAttribute('data-category');
+      if (cat === 'all' || categories.includes(cat)) {
+        card.style.display = 'grid';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // 5. Benchmark Visualizer Data & Switching
+  const benchmarkData = {
+    latency: [
+      { name: 'FP32 Baseline (PyTorch/ONNX)', val: 93.17, text: '93.17 ms', class: 'fill-fp32', max: 130 },
+      { name: 'INT8 Dynamic Quantization', val: 121.06, text: '121.06 ms (Slow CPU scaling)', class: 'fill-int8-dyn', max: 130 },
+      { name: 'INT8 Static Calibration (Recommended)', val: 86.31, text: '86.31 ms (8% Faster)', class: 'fill-int8-stat', max: 130 }
+    ],
+    size: [
+      { name: 'FP32 Baseline', val: 3.64, text: '3.64 MB', class: 'fill-fp32', max: 4.0 },
+      { name: 'INT8 Dynamic Quantization', val: 0.93, text: '0.93 MB (-74.3%)', class: 'fill-int8-dyn', max: 4.0 },
+      { name: 'INT8 Static Calibration (Recommended)', val: 3.19, text: '3.19 MB (-12.3%)', class: 'fill-int8-stat', max: 4.0 }
+    ],
+    accuracy: [
+      { name: 'FP32 Baseline', val: 98.93, text: '98.93% (F1: 0.9885)', class: 'fill-fp32', max: 100 },
+      { name: 'INT8 Dynamic Quantization', val: 99.01, text: '99.01% (F1: 0.9892)', class: 'fill-int8-dyn', max: 100 },
+      { name: 'INT8 Static Calibration (Recommended)', val: 98.93, text: '98.93% (F1: 0.9873)', class: 'fill-int8-stat', max: 100 }
+    ]
+  };
+
+  function switchMetric(metricKey, btn) {
+    document.querySelectorAll('.metric-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const container = document.getElementById('chart-bars');
+    container.innerHTML = '';
+
+    const items = benchmarkData[metricKey];
+    items.forEach(item => {
+      const pct = (item.val / item.max) * 100;
+      const row = document.createElement('div');
+      row.className = 'chart-row';
+      row.innerHTML = `
+        <div class="row-info">
+          <span style="color: var(--text-main); font-weight: 500;">${item.name}</span>
+          <span style="color: var(--cyber-mint); font-weight: 600;">${item.text}</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill ${item.class}" style="width: ${pct}%;"></div>
+        </div>
+      `;
+      container.appendChild(row);
+    });
+  }
+  switchMetric('latency', document.querySelector('.metric-btn.active'));
+
+  // 6. RAG API Simulator
+  const simulatedRags = {
+    "How does rate limiting protect the FastAPI backend?": `
+      <strong>[Claude 3.5 Sonnet RAG Output]</strong><br><br>
+      Based on your notes in <code>Cloud_Notes_API</code>, rate limiting is implemented using <strong>slowapi</strong> at <code>10 requests/minute</code> per user token for expensive endpoints such as <code>/ask_notes</code>.<br><br>
+      <strong>Key Implementation Details:</strong><br>
+      • <em>Limiter Setup:</em> <code>Limiter(key_func=get_remote_address)</code> registered in FastAPI middleware.<br>
+      • <em>Security Impact:</em> Prevents LLM API quota exhaustion, mitigates DDoS attacks, and guarantees API SLA stability on AWS EC2.
+    `,
+    "What are the ONNX quantization results on Raspberry Pi 4?": `
+      <strong>[Claude 3.5 Sonnet RAG Output]</strong><br><br>
+      According to your <code>edge/reports/raspberry_pi_benchmark_static.md</code> notes:<br><br>
+      • <strong>Selected Model:</strong> <code>ecg_model_int8_static.onnx</code><br>
+      • <strong>Latency:</strong> Reduced from 93.17 ms (FP32) to <strong>86.31 ms</strong> on Raspberry Pi 4 (aarch64).<br>
+      • <strong>Accuracy & F1:</strong> Maintained high precision at <strong>98.93% Accuracy</strong> and 0.9873 Macro F1.<br>
+      • <strong>Throughput:</strong> 11.55 ECG window inferences per second, streaming seamlessly over MQTT.
+    `,
+    "Summarize the Terraform EC2 deployment steps": `
+      <strong>[Claude 3.5 Sonnet RAG Output]</strong><br><br>
+      From your <code>terraform/main.tf</code> notes:<br><br>
+      1. Provisions an <code>AWS EC2 t2.micro / t3.micro</code> instance with GP3 EBS volume.<br>
+      2. Configures Security Group rules allowing Port 443 (HTTPS) and Port 22 (SSH).<br>
+      3. Deploys Docker stack with Nginx reverse proxy issuing SSL via sslip.io.<br>
+      4. Automates deployment via GitHub Actions workflow on push to <code>main</code> branch.
+    `
+  };
+
+  function setQuery(q) {
+    document.getElementById('rag-input').value = q;
+    runRagQuery();
+  }
+
+  function runRagQuery() {
+    const query = document.getElementById('rag-input').value.trim();
+    const outputDiv = document.getElementById('rag-output');
+    outputDiv.innerHTML = '<span style="color: var(--cyber-mint); font-family: var(--font-code);">[Vector Search Querying Embeddings & Anthropic API...]</span>';
+
+    setTimeout(() => {
+      if (simulatedRags[query]) {
+        outputDiv.innerHTML = simulatedRags[query];
+      } else {
+        outputDiv.innerHTML = `
+          <strong>[Claude 3.5 Sonnet RAG Output]</strong><br><br>
+          Query: "<em>${query}</em>"<br><br>
+          Retrieved relevant note context from PostgreSQL database. The backend processed the prompt using structured prompt engineering with 0.2 temperature setting.
+        `;
+      }
+    }, 600);
+  }
+
+  // 7. Modals
+  const archModal = document.getElementById('arch-modal');
+  const letterModal = document.getElementById('letter-modal');
+  const cvModal = document.getElementById('cv-modal');
+
+  const archContentMap = {
+    'cloud-notes': `
+      <h3 style="font-family: var(--font-heading); color: var(--cyber-mint); font-size: 1.4rem; margin-bottom: 16px;">Cloud Notes API — Architecture Blueprint</h3>
+      <div style="background: #060911; padding: 20px; border-radius: 6px; border: 1px solid var(--border-line); font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+Client Browser/App ──[HTTPS/443]──> Nginx SSL Reverse Proxy
+                                         │
+                                   [HTTP/8000]
+                                         ▼
+                             FastAPI + slowapi Rate Limiter
+                                 ├──> PostgreSQL 15 (SQLAlchemy / Alembic)
+                                 └──> Anthropic Claude 3.5 API (RAG / Summary)
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 12px;"><strong>Security &amp; Infrastructure Stack:</strong></p>
+      <ul style="color: var(--text-muted); font-size: 0.92rem; padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+        <li>Stateless JWT authentication with Argon2 password hashing.</li>
+        <li>Rate limiting (slowapi) set to 10 req/min for AI endpoints.</li>
+        <li>Terraform HCL provisioning AWS EC2, Security Groups, and GP3 storage.</li>
+        <li>GitHub Actions CI/CD automatically running Pytest suite and deploying to EC2.</li>
+      </ul>
+      <div style="margin-top: 24px;">
+        <a href="https://16.16.110.208.sslip.io/docs" target="_blank" rel="noopener" class="btn btn-primary">Open Live Swagger UI</a>
+      </div>
+    `,
+    'ecg-edge': `
+      <h3 style="font-family: var(--font-heading); color: var(--hennge-crimson-soft); font-size: 1.4rem; margin-bottom: 16px;">ECG Edge Multimodal Inference Pipeline</h3>
+      <div style="background: #060911; padding: 20px; border-radius: 6px; border: 1px solid var(--border-line); font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+12-Lead ECG Signal ──> Bandpass (0.5-45Hz) ──> 1D-CNN + BiLSTM Model
+                                                        │
+                                            [ONNX INT8 Static Calibration]
+                                                        │
+                                                        ▼
+                                           Raspberry Pi 4 (86.31ms)
+                                                        │
+                                                  [MQTT Publish]
+                                                        ▼
+                                           Mosquitto Broker ──> Live Dashboard
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        Model trained on Chapman-Shaoxing 10,546 recordings. Quantized via ONNX Runtime static calibration on Conv/Gemm nodes, producing an optimized 3.19 MB binary executing sub-90ms inference on Raspberry Pi 4.
+      </p>
+    `,
+    'iot-twin': `
+      <h3 style="font-family: var(--font-heading); color: var(--sakura-pink); font-size: 1.4rem; margin-bottom: 16px;">IoT Digital Twin Architecture</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px;">
+        Captures real-time sensor streams via MQTT broker into a FastAPI telemetry service, persisting metrics to PostgreSQL 15 and auto-provisioning live Grafana 10.4.2 monitoring dashboards under Docker Compose.
+      </p>
+    `,
+    'post-api': `
+      <h3 style="font-family: var(--font-heading); color: #8899ff; font-size: 1.4rem; margin-bottom: 16px;">Post Management REST API Blueprint</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px;">
+        RESTful FastAPI application implementing full CRUD operations for user posts, voting mechanics, OAuth2 Password Bearer flow with JWT access tokens, and seamless database migrations via Alembic.
+      </p>
+    `
+  };
+
+  function openArchModal(key) {
+    document.getElementById('modal-body').innerHTML = archContentMap[key];
+    archModal.classList.add('active');
+  }
+  function closeArchModal() { archModal.classList.remove('active'); }
+
+  function openCoverLetterModal() { letterModal.classList.add('active'); }
+  function closeCoverLetterModal() { letterModal.classList.remove('active'); }
+
+  function openCvModal() { cvModal.classList.add('active'); }
+  function closeCvModal() { cvModal.classList.remove('active'); }
+
+  // 8. Copy Toast
+  function copyEmail() {
+    navigator.clipboard.writeText('khallaftaher392@gmail.com');
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  // 9. Background Canvas Animation
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height, particles = [];
+
+  function resizeCanvas() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4;
+      this.radius = Math.random() * 1.5 + 1;
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 242, 254, 0.25)';
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 45; i++) particles.push(new Particle());
+
+  function animateCanvas() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw();
+
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0, 242, 254, ${0.15 * (1 - dist / 120)})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animateCanvas);
+  }
+  animateCanvas();
+</script>
+
+</body>
+</html>
