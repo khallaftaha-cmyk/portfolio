@@ -720,31 +720,45 @@
       </article>
 
       <!-- PROJECT 3: IOT DIGITAL TWIN -->
-      <article class="project-card glass-card" data-category="edge devops">
+      <article class="project-card glass-card" data-category="edge devops cloud">
         <div class="project-meta">
           <div>
-            <div class="project-number">03 / IOT TELEMETRY ENGINE</div>
-            <h3 class="project-title">IoT Digital Twin System &amp; Dashboard</h3>
-            <div class="live-badge" style="background: rgba(247, 174, 248, 0.12); border-color: rgba(247, 174, 248, 0.3); color: var(--sakura-pink);">
-              <span>📊 Grafana 10.4 Auto-Provisioned</span>
+            <div class="project-number">03 / IOT TELEMETRY &amp; 3D WEBGL</div>
+            <h3 class="project-title">3D IoT Digital Twin Engine &amp; AWS Telemetry</h3>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+              <a href="http://13.62.228.155:5173" target="_blank" rel="noopener" class="live-badge" style="background: rgba(0, 242, 254, 0.15); border-color: rgba(0, 242, 254, 0.4); color: var(--cyber-mint);">
+                <span>🎨 Live 3D Web Dashboard (Port 5173)</span>
+              </a>
+              <a href="http://13.62.228.155:8000/docs" target="_blank" rel="noopener" class="live-badge" style="background: rgba(0, 230, 118, 0.12); border-color: rgba(0, 230, 118, 0.3); color: #00e676;">
+                <span>⚡ Live Swagger API (Port 8000)</span>
+              </a>
+              <a href="http://13.62.228.155:3000" target="_blank" rel="noopener" class="live-badge" style="background: rgba(247, 174, 248, 0.12); border-color: rgba(247, 174, 248, 0.3); color: var(--sakura-pink);">
+                <span>📊 Grafana Analytics (Port 3000)</span>
+              </a>
             </div>
           </div>
           <div class="tags-flex">
-            <span class="tag">MQTT</span>
-            <span class="tag">RTOS</span>
+            <span class="tag">Three.js (3D WebGL)</span>
+            <span class="tag">WebSockets</span>
+            <span class="tag">AWS IoT Core TLS</span>
+            <span class="tag">AWS RDS PostgreSQL 16</span>
             <span class="tag">FastAPI</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">Docker Compose</span>
-            <span class="tag">Grafana 10.4.2</span>
-            <span class="tag">Model-Based Design (MIL/SIL)</span>
+            <span class="tag">Redis</span>
+            <span class="tag">Mosquitto MQTT</span>
+            <span class="tag">Grafana 10.4</span>
+            <span class="tag">Actuation Control</span>
+            <span class="tag">Alert Engine</span>
           </div>
         </div>
         <div>
           <p class="project-desc">
-            A software digital twin mirror for physical IoT setups. Captures real-time sensor streams via MQTT broker, persists metrics to PostgreSQL container, and auto-provisions live telemetry dashboards in Grafana. Engineered under Model-Based Design practices (MIL/SIL/HIL).
+            Full-stack real-time 3D Digital Twin platform deployed live on AWS. Features an interactive <strong>Three.js 3D WebGL dashboard</strong> connected via <strong>WebSockets</strong>, an <strong>AWS IoT Core MQTT bridge over TLS</strong> (X.509 certs), cloud database persistence on <strong>AWS RDS PostgreSQL 16</strong> (<code>iot-twin-db</code>), bi-directional remote actuator controls, automated threshold alert engine, and auto-provisioned Grafana monitoring.
           </p>
           <div class="project-actions">
-            <button class="btn btn-secondary" onclick="openArchModal('iot-twin')">View Telemetry Architecture</button>
+            <a href="http://13.62.228.155:5173" target="_blank" rel="noopener" class="btn btn-primary">Launch Live 3D Web App</a>
+            <a href="http://13.62.228.155:8000/docs" target="_blank" rel="noopener" class="btn btn-secondary">Open Swagger API Docs</a>
+            <button class="btn btn-ghost" onclick="openArchModal('iot-twin')">View Telemetry Architecture</button>
+            <a href="http://13.62.228.155:3000" target="_blank" rel="noopener" class="btn btn-ghost">Grafana Dashboards</a>
           </div>
         </div>
       </article>
@@ -1027,14 +1041,24 @@
   mobileToggle.addEventListener('click', () => { mobileNav.classList.toggle('open'); });
   function closeMobileNav() { mobileNav.classList.remove('open'); }
 
-  // 3. Reveal on Scroll
+  // 3. Reveal on Scroll with Immediate Visibility Failsafe
   const revealElements = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if(e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.05 });
   revealElements.forEach(el => observer.observe(el));
+  // Failsafe: Ensure all elements reveal after load regardless of scroll/observer state
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      revealElements.forEach(el => el.classList.add('in'));
+    }, 150);
+  });
+  // Immediate reveal backup
+  setTimeout(() => {
+    revealElements.forEach(el => el.classList.add('in'));
+  }, 300);
 
   // 4. Project Filtering
   function filterProjects(cat, btn) {
@@ -1194,10 +1218,32 @@ Client Browser/App ──[HTTPS/443]──> Nginx SSL Reverse Proxy
       </p>
     `,
     'iot-twin': `
-      <h3 style="font-family: var(--font-heading); color: var(--sakura-pink); font-size: 1.4rem; margin-bottom: 16px;">IoT Digital Twin Architecture</h3>
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px;">
-        Captures real-time sensor streams via MQTT broker into a FastAPI telemetry service, persisting metrics to PostgreSQL 15 and auto-provisioning live Grafana 10.4.2 monitoring dashboards under Docker Compose.
+      <h3 style="font-family: var(--font-heading); color: var(--sakura-pink); font-size: 1.4rem; margin-bottom: 16px;">3D IoT Digital Twin Architecture &amp; AWS Infrastructure</h3>
+      <div style="background: #060911; padding: 20px; border-radius: 6px; border: 1px solid var(--border-line); font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+Physical/Virtual Sensors ──[MQTT/TLS]──> AWS IoT Core Bridge / Mosquitto
+                                                │
+                                          [WebSockets]
+                                                ▼
+                                    Three.js 3D WebGL Dashboard
+                                                │
+                                           [REST API / Actuation]
+                                                ▼
+                                   FastAPI Engine + Alert Engine
+                                  ├──> AWS RDS PostgreSQL 16 (Live DB)
+                                  ├──> Redis (State Persistence)
+                                  └──> Grafana 10.4 Dashboards
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 14px;">
+        Full-stack IoT digital twin platform featuring bi-directional actuator control APIs, automated threshold alert engine, AWS IoT Core MQTT bridge over TLS (X.509 certs), live cloud database on AWS RDS PostgreSQL 16, and an interactive 3D WebGL visualization built with Three.js.
       </p>
+      <div style="display: flex; flex-direction: column; gap: 8px; font-family: var(--font-code); font-size: 0.82rem; background: rgba(0, 242, 254, 0.05); padding: 14px; border-radius: 6px; border: 1px solid rgba(0, 242, 254, 0.2);">
+        <div>🎨 <strong>3D Web Dashboard:</strong> <a href="http://13.62.228.155:5173" target="_blank" style="color: var(--cyber-mint);">http://13.62.228.155:5173</a></div>
+        <div>⚡ <strong>FastAPI Docs:</strong> <a href="http://13.62.228.155:8000/docs" target="_blank" style="color: var(--cyber-mint);">http://13.62.228.155:8000/docs</a></div>
+        <div>🩺 <strong>Health Check:</strong> <a href="http://13.62.228.155:8000/health" target="_blank" style="color: var(--cyber-mint);">http://13.62.228.155:8000/health</a></div>
+        <div>📊 <strong>Grafana Analytics:</strong> <a href="http://13.62.228.155:3000" target="_blank" style="color: var(--sakura-pink);">http://13.62.228.155:3000</a> (Auto-Provisioned Monitoring)</div>
+        <div>🐘 <strong>AWS RDS Database:</strong> <code>iot-twin-db.cjagu2aigjp2.eu-north-1.rds.amazonaws.com</code></div>
+        <div>📡 <strong>AWS IoT Core Broker:</strong> <code>a1tthoweuehg33-ats.iot.eu-north-1.amazonaws.com:8883</code></div>
+      </div>
     `,
     'post-api': `
       <h3 style="font-family: var(--font-heading); color: #8899ff; font-size: 1.4rem; margin-bottom: 16px;">Post Management REST API Blueprint</h3>
