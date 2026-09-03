@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TAHER KHALLAF — Resume</title>
+<style>
+  @page {
+    size: A4;
+    margin: 10mm 12mm;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+    line-height: 1.35;
+    font-size: 9.5pt;
+    -webkit-print-color-adjust: exact;
+  }
+  a { color: #0056b3; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4px;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    border-bottom: 1.5px solid #222;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 18pt;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #0f172a;
+    margin-bottom: 2px;
+  }
+  .subtitle {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 4px;
+  }
+  .contact-bar {
+    font-size: 8.5pt;
+    color: #334155;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .contact-bar span { font-weight: 500; }
+
+  /* SECTIONS */
+  section { margin-bottom: 9px; }
+  .section-title {
+    font-size: 10pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #0f172a;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+  }
+
+  /* EDUCATION & EXPERIENCE ENTRIES */
+  .entry { margin-bottom: 6px; }
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .entry-title { font-weight: 700; font-size: 9.5pt; color: #0f172a; }
+  .entry-subtitle { font-weight: 600; color: #334155; font-size: 9pt; }
+  .entry-date { font-size: 8.5pt; color: #64748b; font-weight: 500; }
+
+  ul {
+    list-style-type: disc;
+    margin-left: 16px;
+    margin-top: 2px;
+  }
+  li {
+    margin-bottom: 2px;
+    color: #334155;
+    font-size: 9pt;
+  }
+  li strong { color: #0f172a; }
+
+  .tech-stack {
+    font-size: 8.2pt;
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    color: #475569;
+    margin-top: 1px;
+  }
+
+  /* SKILLS & LANGUAGES GRID */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 3px 8px;
+    font-size: 8.8pt;
+  }
+  .skill-cat { font-weight: 700; color: #0f172a; }
+  .skill-val { color: #334155; }
+
+  /* PRINT OPTIMIZATION */
+  @media print {
+    body { background: none; }
+    .container { width: 100%; max-width: 100%; padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <h1>KHALLAF TAHER</h1>
+    <div class="subtitle">Cloud &amp; IoT Engineering Student · HENNGE GIP Candidate</div>
+    <div class="contact-bar">
+      <span>Rabat, Morocco</span> |
+      <span>+212 697-307024</span> |
+      <span><a href="mailto:khallaftaher392@gmail.com">khallaftaher392@gmail.com</a></span> |
+      <span>GitHub: <a href="https://github.com/khallaftaha-cmyk" target="_blank">khallaftaha-cmyk</a></span> |
+      <span>LinkedIn: <a href="https://www.linkedin.com/in/taher-khallaf/" target="_blank">taher-khallaf</a></span>
+    </div>
+  </header>
+
+  <!-- EDUCATION -->
+  <section>
+    <div class="section-title">Education</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Institut National des Postes et Télécommunications (INPT)</span>
+        <span class="entry-date">Rabat, Morocco | 2025 – Present</span>
+      </div>
+      <div class="entry-subtitle">Engineering Degree in Cloud &amp; IoT Engineering</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">The University of Tokyo (UTokyo GCI)</span>
+        <span class="entry-date">Tokyo, Japan | 2026 (Enrolled)</span>
+      </div>
+      <div class="entry-subtitle">Global Consumer Intelligence &amp; Data Science Program</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Classes Préparatoires Ibn Timiya</span>
+        <span class="entry-date">Marrakech, Morocco | 2023 – 2025</span>
+      </div>
+      <div class="entry-subtitle">Intensive Prep Curriculum in Mathematics, Physics &amp; Computer Science</div>
+    </div>
+  </section>
+
+  <!-- TECHNICAL SKILLS & LANGUAGES -->
+  <section>
+    <div class="section-title">Technical Skills &amp; Languages</div>
+    <div class="skills-grid">
+      <span class="skill-cat">Cloud &amp; DevOps:</span>
+      <span class="skill-val">AWS (EC2, S3, IAM), Docker, Docker Compose, Terraform (IaC), GitHub Actions (CI/CD), Nginx, Linux (Bash)</span>
+
+      <span class="skill-cat">Backend &amp; Web:</span>
+      <span class="skill-val">Python (FastAPI, PyTorch), React, JavaScript (ES6+), REST APIs, OAuth2, JWT (Argon2/Bcrypt), HTML/CSS</span>
+
+      <span class="skill-cat">DB &amp; Protocols:</span>
+      <span class="skill-val">PostgreSQL, SQLAlchemy ORM, Alembic, ONNX Runtime, Mosquitto MQTT, slowapi Rate Limiting, Git</span>
+
+      <span class="skill-cat">Languages:</span>
+      <span class="skill-val"><strong>Arabic</strong> (Native), <strong>English</strong> (Fluent / Debater), <strong>French</strong> (Fluent), <strong>Japanese</strong> (Basic / Self-Studying)</span>
+    </div>
+  </section>
+
+  <!-- TECHNICAL PROJECTS -->
+  <section>
+    <div class="section-title">Technical Projects</div>
+
+    <!-- PROJECT 1 -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Cloud Notes API &amp; AI RAG Assistant <span style="font-weight: 400; font-size: 8.5pt;">[<a href="https://16.16.110.208.sslip.io/docs" target="_blank">Live API Docs</a>]</span></span>
+        <span class="entry-date">Personal Project | 2025</span>
+      </div>
+      <div class="tech-stack">Tech: FastAPI, PostgreSQL 15, Anthropic Claude 3.5 Sonnet, Docker, AWS EC2, Terraform IaC, GitHub Actions</div>
+      <ul>
+        <li>Engineered a containerized backend on AWS EC2 behind an Nginx SSL proxy with stateless JWT auth (Argon2).</li>
+        <li>Integrated Claude 3.5 Sonnet RAG vector search (<code>/ask_notes</code>) for natural language querying &amp; automatic note summarization.</li>
+        <li>Enforced system security using <code>slowapi</code> rate limiting (10 req/min) and automated AWS deployment via Terraform &amp; CI/CD.</li>
+      </ul>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">ECG Multimodal Edge Inference Chain</span>
+        <span class="entry-date">Supervised Internship Project | 2025</span>
+      </div>
+      <div class="tech-stack">Tech: PyTorch, ONNX Runtime, INT8 Static Quantization, Raspberry Pi 4, Mosquitto MQTT, WFDB Chapman Dataset</div>
+      <ul>
+        <li>Optimized a 12-lead ECG neural model (1D-CNN + BiLSTM) trained on 10,500+ records for embedded Raspberry Pi 4 execution.</li>
+        <li>Quantized PyTorch weights to ONNX INT8 static calibration, cutting latency to <strong>86.31 ms</strong> (8% faster) with <strong>98.93% Accuracy</strong>.</li>
+        <li>Architected a real-time MQTT telemetry pipeline publishing live edge predictions to Mosquitto broker clients.</li>
+      </ul>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">3D IoT Digital Twin Engine &amp; AWS Telemetry <span style="font-weight: 400; font-size: 8.5pt;">[<a href="http://13.62.228.155:5173" target="_blank">Live 3D App</a> | <a href="http://13.62.228.155:8000/docs" target="_blank">API Docs</a>]</span></span>
+        <span class="entry-date">Personal/Coursework Project | 2026</span>
+      </div>
+      <div class="tech-stack">Tech: Three.js (3D WebGL), WebSockets, AWS IoT Core TLS, AWS RDS PostgreSQL 16, FastAPI, Redis, Docker</div>
+      <ul>
+        <li>Architected a real-time 3D WebGL Digital Twin platform with Three.js and WebSockets for dynamic sensor state visualization.</li>
+        <li>Configured AWS IoT Core MQTT bridge over TLS (X.509 certs), live cloud database on AWS RDS PostgreSQL 16, and Redis state caching.</li>
+        <li>Implemented bi-directional actuator remote control APIs and an automated threshold evaluation alert engine.</li>
+      </ul>
+    </div>
+
+    <!-- PROJECT 4 -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Post Management REST API</span>
+        <span class="entry-date">Personal Project | 2025</span>
+      </div>
+      <div class="tech-stack">Tech: Python, FastAPI, PostgreSQL, SQLAlchemy ORM, Alembic, JWT, OAuth2</div>
+      <ul>
+        <li>Developed a secure RESTful API with full CRUD functionality, voting system, and OAuth2/JWT authorization scoping.</li>
+        <li>Managed database schemas and seamless automated migrations using SQLAlchemy ORM and Alembic.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- LEADERSHIP & CERTIFICATIONS -->
+  <section>
+    <div class="section-title">Leadership &amp; Certifications</div>
+    <ul>
+      <li><strong>Head of English Cell — Great Debaters Club (INPT)</strong>: Designed and led a 14-session onboarding program teaching British Parliamentary debating, evidence-based argumentation, and public speaking.</li>
+      <li><strong>Organizer — Forum INPT 2025</strong>: Coordinated student-company relations for Morocco's 21st national engineering forum.</li>
+      <li><strong>Certifications</strong>: Oracle OCI AI Foundations Associate (2025) · Oracle OCI &amp; AWS Architect Formation (2025) · Stevens Initiative Global Leadership (ASU &amp; Lycée d'Excellence, 2022).</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>
