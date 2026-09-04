@@ -923,20 +923,28 @@
 
 <!-- COVER LETTER MODAL -->
 <div class="modal-overlay" id="letter-modal">
-  <div class="modal-content">
+  <div class="modal-content" style="max-width: 860px;">
     <button class="modal-close" onclick="closeCoverLetterModal()">&times;</button>
-    <h3 style="font-family: var(--font-heading); color: var(--hennge-crimson-soft); font-size: 1.4rem; margin-bottom: 16px;">HENNGE Global Internship Application Letter</h3>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+      <h3 style="font-family: var(--font-heading); color: var(--hennge-crimson-soft); font-size: 1.4rem;">HENNGE Global Internship Application Letter</h3>
+      <div style="display: flex; gap: 10px;">
+        <a href="Taher_Khallaf_HENNGE_Cover_Letter.pdf" download="Taher_Khallaf_HENNGE_Cover_Letter.pdf" class="btn btn-primary" style="font-size: 0.76rem; padding: 6px 14px;">⬇️ Download PDF</a>
+        <a href="hennge_cover_letter.html" target="_blank" class="btn btn-secondary" style="font-size: 0.76rem; padding: 6px 14px;">Open HTML</a>
+      </div>
+    </div>
     <div style="font-family: var(--font-body); font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; display: flex; flex-direction: column; gap: 14px;">
-      <p><strong>Applicant:</strong> KHALLAF Taher | INPT Rabat (Cloud &amp; IoT) &amp; UTokyo GCI Enrolled</p>
-      <p><strong>Target Program:</strong> HENNGE Global Internship Program (Full Stack Engineering Pathway)</p>
+      <p><strong>Applicant:</strong> KHALLAF Taher | Cloud &amp; IoT Engineering, INPT Rabat &amp; The University of Tokyo (UTokyo GCI)</p>
+      <p><strong>Target Pathway:</strong> Full Stack Engineering Pathway — HENNGE Global Internship Program (GIP)</p>
       <hr style="border-color: var(--border-line);">
       <p>Dear HENNGE Global Internship Team,</p>
-      <p>I am writing to express my strong enthusiasm for applying to the Full Stack Engineering pathway of the HENNGE Global Internship Program (GIP). What drew me to HENNGE is not just your position as a cloud security leader in Japan, but how transparently your engineering team communicates — from technical post-mortems and open-source contributions to hiring philosophies on your engineering blog. Most organizations talk about open engineering culture; HENNGE actively publishes it. That commitment to transparency and technical excellence is precisely the environment where I want to learn and contribute.</p>
-      <p>My most defining engineering project is my <strong>Cloud Notes API</strong> — a production backend built with FastAPI, PostgreSQL, and Docker, deployed live on AWS EC2 via Terraform IaC and GitHub Actions CI/CD. Watching the backend architecture click into place was deeply satisfying. However, the real breakthrough occurred when I built a React frontend interface to consume the API. Coming from a purely backend mindset, mixing UI components with state management felt unfamiliar at first — until the moment I created a new note and saw it render instantly across the application without a page refresh. That moment transformed full-stack engineering from a label into an intuitive craft. I am currently extending this platform with an AI Retrieval-Augmented Generation (RAG) vector layer using Claude 3.5 Sonnet to enable natural language querying over stored notes.</p>
-      <p>This drive to examine processes rather than settled outputs shapes how I approach developer workflows. While configuring authentication, I spent hours debugging JWT requests in Postman before realizing I could store tokens in environment variables to automate header injection across my test suite. It was a simple realization, but it permanently altered how I evaluate developer productivity.</p>
-      <p>I apply this exact same mindset beyond software architecture. As Head of the English Debating Cell at INPT, I designed a 14-session onboarding program to help engineering students structure British Parliamentary arguments and overcome speaking anxiety. Earlier, as head of sponsorship for our STEM club, early failed pitches taught me a crucial lesson in communication: genuine persuasion requires showing stakeholders the value they gain, rather than simply broadcasting what you built.</p>
-      <p>My goal to live and work in Japan is rooted in years of self-taught language study and a deep respect for Japan’s engineering philosophy — automating routine processes so human intellect can tackle complex problems. My enrollment in <strong>The University of Tokyo's Global Consumer Intelligence (UTokyo GCI)</strong> program reflects my active commitment to engaging with Japanese data science and engineering methodologies. The HENNGE Global Internship is not a stepping stone for me; it is the specific, deliberate first step toward building a long-term engineering career in Tokyo.</p>
-      <p>With deep respect,<br><strong>KHALLAF Taher</strong></p>
+      <p>I am writing to express my strong enthusiasm for applying to the Full Stack Engineering pathway of the HENNGE Global Internship Program (GIP). What drew me to HENNGE is how authentically your team embodies an open engineering culture. Most tech companies talk about agility, but reading HENNGE's engineering blog — from transparent post-mortems and hiring philosophies to your active contributions to Open Source Software (OSS) — revealed an organization that truly practices what it preaches. That culture of openness, paired with your position as Japan's premier cloud security and SaaS innovator, is precisely where I want to challenge myself and contribute.</p>
+      <p>At HENNGE, you define a standout engineer as a <em>"learnaholic"</em> who embraces <strong>Henka (transformation) and continuous challenge</strong>. This philosophy has shaped my entire engineering journey. Coming from the intense mathematical and analytical rigor of CPGE preparatory classes, I taught myself modern full-stack web development and cloud engineering from the ground up, driven by a relentless curiosity to understand how software works from kernel to client.</p>
+      <p>The project where this clicked into place is my <strong>Cloud Notes API</strong> — a containerized application built with FastAPI, PostgreSQL, and Docker, deployed live on AWS EC2 with automated CI/CD via GitHub Actions and Terraform IaC. Architecting the backend with stateless JWT authentication and <code>slowapi</code> rate limiting was deeply rewarding, but my most exciting breakthrough came when building the React interface. Transitioning from a purely server-side mindset to managing client state and reactive UI components was a significant challenge — until I created a note and watched it render instantaneously without a full-page reload. That excitement of bridging resilient backend systems with fluid, human-centric user experiences is what defines full-stack engineering for me. I have since extended this platform with an AI Retrieval-Augmented Generation (RAG) vector layer using Claude 3.5 Sonnet to enable natural language querying across notes.</p>
+      <p>I continued pushing this boundary in my recent <strong>3D IoT Digital Twin Platform</strong>. Combining an AWS IoT Core MQTT bridge over TLS (X.509 certs), cloud persistence on AWS RDS PostgreSQL 16, and bi-directional actuation APIs with an interactive 3D WebGL dashboard built in Three.js and real-time WebSockets showed me the power of transforming raw telemetry into intuitive, actionable visualizations.</p>
+      <p>Beyond code, I believe that continuous learning is magnified when shared with others. As <strong>Head of the English Debating Cell at INPT</strong>, I noticed many brilliant engineering peers struggled with expressing their ideas. I designed and led a 14-session onboarding program to mentor students through British Parliamentary debate formats, helping them build structured reasoning and overcome public speaking anxiety. Mentoring juniors and fostering an inclusive, communicative environment taught me that great engineering teams succeed through empathy, clarity, and shared momentum.</p>
+      <p>My decision to pursue my career in Japan is intentional and proactive. I have been self-studying Japanese and have actively enrolled in <strong>The University of Tokyo's Global Consumer Intelligence (UTokyo GCI)</strong> program to deepen my engagement with Japanese data science and engineering methodologies. The HENNGE Global Internship is not a temporary stop for me; it is the dedicated, deliberate first step toward building a long-term engineering career in Tokyo. I would be thrilled to bring my energy, full-stack skillset, and learnaholic mindset to HENNGE.</p>
+      <p>Thank you for your time, consideration, and dedication to reviewing each application with human care.</p>
+      <p>With deep respect and enthusiasm,<br><strong>KHALLAF Taher</strong></p>
     </div>
   </div>
 </div>
@@ -945,9 +953,12 @@
 <div class="modal-overlay" id="cv-modal">
   <div class="modal-content" style="max-width: 860px;">
     <button class="modal-close" onclick="closeCvModal()">&times;</button>
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
       <h3 style="font-family: var(--font-heading); color: var(--cyber-mint); font-size: 1.4rem;">TAHER KHALLAF — 1-Page Official Resume (CV)</h3>
-      <a href="resume.html" target="_blank" class="btn btn-secondary" style="font-size: 0.76rem; padding: 6px 14px;">Print / Download PDF</a>
+      <div style="display: flex; gap: 10px;">
+        <a href="Taher_Khallaf_CV.pdf" download="Taher_Khallaf_CV.pdf" class="btn btn-primary" style="font-size: 0.76rem; padding: 6px 14px;">⬇️ Download PDF (Clickable Links)</a>
+        <a href="resume.html" target="_blank" class="btn btn-secondary" style="font-size: 0.76rem; padding: 6px 14px;">Open HTML</a>
+      </div>
     </div>
     <div style="background: #fff; color: #1a1a1a; padding: 28px; border-radius: 6px; font-family: sans-serif; font-size: 0.9rem; line-height: 1.4;">
       <div style="text-align: center; border-bottom: 2px solid #222; padding-bottom: 8px; margin-bottom: 14px;">
